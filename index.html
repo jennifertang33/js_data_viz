@@ -275,80 +275,28 @@
     <script src="./data/listings.js"></script>
 
     <script src="./charts/types-of-accommodation.js"></script>
-    <script>
-        console.log("is typeA available in html",typeA )
-        Highcharts.chart('types-of-accommodation-chart', {
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: 'Accommodation types'
-          },
-          xAxis: {
-              type: 'category'
-          },
-          yAxis: {
-              title: {
-                  text: null
-              }
-          },
-          legend: {
-              enabled: false
-          },
-          series: [
-              {
-              name: 'Accommodation types',
-              colorByPoint: true,
-              data: [{
-                  name: 'Private room',
-                  y: typeA.private
-              },{
-                  name: 'Entire home/apt',
-                  y: typeA.entire
-              },{
-                  name: 'Shared room',
-                  y: typeA.shared
-              }]
-          }]
-      })
-    </script>
+    
 
     <script src="./charts/accomodation-price.js"></script>
-    <script>
-        console.log("is priceA available in html", priceA )
-        Highcharts.chart('accomodation-price-chart', {
-            chart: {
-            type: 'pie'
-            },
-            title: {
-                text: 'Accomodation price'
-            },
-            series: [{
-            name: 'Brands',
-            innerSize: '40%',
-            colorByPoint: true,
-            data: [{
-                name: 'Less than 500',
-                y: priceA.lessThan500,
-            }, {
-                name: 'Less than 1000',
-                y: priceA.lessThan1000
-            }, {
-                name: 'Less than 2000',
-                y: priceA.lessThan2000
-            }, {
-                name: 'Less than 4000',
-                y: priceA.lessThan4000
-            }, {
-                name: 'More than 3999',
-                y: priceA.moreThan3999
-            }]
-        }]
-    })
-    </script>
+    
     <!-- <script>
         makeChartForAccommodationTypes(window.airbnbAccomodationData);
     </script> -->
+    <script>
+        const airbnbDataUrl = "https://raw.githubusercontent.com/jennifertang33/js_data_viz/main/data/listings.json";
+        fetch(airbnbDataUrl)
+        .then(response => response.json())
+        .then(accommodations => {
+            console.log("accommodations data: ",accommodations);
+            makeChartForAccommodationTypes(accommodations);
+            makeChartForAccommodationPrice(accommodations);
+            // accomodationPriceChart(accommodations);
+            // neighbourhoodChart(accommodations);
+        })
+        .catch(error=>console.log(error));
+    </script>
 
+
+    
 </body>
 </html>
